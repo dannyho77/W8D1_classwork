@@ -8,6 +8,27 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        
+        @post.author_id = current_user.id
+         
+        debugger 
+      
+
+        # param titles.each  do  |title| 
+            #add it to the sub_post table
+                    # sp = SubPost.new(postid and subid)
+                        # sp.save
+        # params[:titles][i]
+        p params
+
+        titles_list = param[:titles]
+        titles_list.each do |title|
+            temp_sub = Sub.find_by_title(title)
+            SubPost.create(sub_id: temp_sub.id, post_id: @post.id)
+        end
+
+
+
 
         if @post.save
             redirect_to sub_url(@post.sub_id)

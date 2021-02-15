@@ -9,11 +9,15 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        @user.sub_id = params[:sub_id]
+        
+        # debugger
 
         if @user.save
+            login!(@user)
+
             redirect_to user_url(@user)
         else
+            # debugger
             flash.now[:errors] = @user.errors.full_messages
             render :new
         end 

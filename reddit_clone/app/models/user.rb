@@ -41,6 +41,7 @@ class User < ApplicationRecord
 
     belongs_to :sub,
         foreign_key: :sub_id,
-        class_name: :Sub
+        class_name: :Sub,
+        optional: true
 
 end
