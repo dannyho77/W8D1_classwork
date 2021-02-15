@@ -21,6 +21,19 @@
             </label>
         </li>
     </ul>
+
+    <ul>
+        <% Sub.all.each do |sub| %>
+            <li>
+                <label><%= sub.title %>
+                    <input type="checkbox" name="title[]" value="<%= sub.title %>">
+                </label>
+            </li>
+        <% end %>
+                
+    </ul>
+        
+
     <button>Create Post</button>
 
 </form>
