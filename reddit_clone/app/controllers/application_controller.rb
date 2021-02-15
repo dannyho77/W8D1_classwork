@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :require_logged_in, :logged_in?, :login!(user), :logout!
+    helper_method :current_user, :require_logged_in, :logged_in?, :logout!
     #celll
     def login!(user)
         @current_user = user
