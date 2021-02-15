@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :require_logged_in, only: [:destroy, :edit, :show, :index]
+    before_action :require_logged_in, only: [:destroy, :edit, :update :show, :index]
 
 
     def new
@@ -35,14 +35,22 @@ class UsersController < ApplicationController
         @user.destroy if @user
         # do we need to include a logout function or one that sets the session_token to nil?
 
-        render :new
+        redirect_to new_user_url
     end
 
     def edit
-        @user = User.find_by(id: params[:id])
+        @user = User.find(params[:id])
+        render :edit
+    end
 
-        # what goes in here?
-        render :show
+    def update
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+            redirect_to user_url(@user)
+        else
+            flash.now[:errors] = @user.errors.full_messages
+            render :edit
+        end
     end
 
 
